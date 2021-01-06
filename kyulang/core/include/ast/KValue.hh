@@ -11,7 +11,8 @@ namespace kyu::lang::ast
         List,
         Nil,
         NativeFunction,
-        Subroutine
+        Subroutine,
+        Map
     } KValueType;
 
     class KValue

@@ -4,6 +4,7 @@
 #include "ast/KNil.hh"
 #include "ast/KNativeFunction.hh"
 #include "ast/KSubroutine.hh"
+#include "ast/KMap.hh"
 
 namespace kyu::lang
 {

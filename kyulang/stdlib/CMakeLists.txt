@@ -10,6 +10,7 @@ target_sources(kyulang-stdlib
         source/string.cc
         source/debug.cc
         source/logic.cc
+        source/map.cc
 )
 
 target_include_directories(kyulang-stdlib PUBLIC include)

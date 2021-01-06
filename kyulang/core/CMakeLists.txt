@@ -19,6 +19,7 @@ target_sources(kyulang-core
         source/ast/KNil.cc
         source/ast/KNativeFunction.cc
         source/ast/KSubroutine.cc
+        source/ast/KMap.cc
 )
 
 target_include_directories(kyulang-core PUBLIC include)

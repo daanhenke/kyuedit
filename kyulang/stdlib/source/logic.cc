@@ -108,3 +108,34 @@ DEFINE_STDFUNC(kyu::lang::stdlib::logic::subroutine)
     auto expression = reinterpret_cast<ast::KList*>(args[1]);
     return new ast::KSubroutine(params, expression);
 }
+
+DEFINE_STDFUNC(kyu::lang::stdlib::logic::local)
+{
+    auto key = reinterpret_cast<ast::KSymbol*>(args[0]);
+
+    if (key->GetType() != ast::KValueType::Symbol)
+    {
+        return new ast::KNil();
+    }
+
+    auto value = vm->EvaluateValue(args[1]);
+    vm->UpdateSymbol(key, value);
+
+    return value;
+}
+
+DEFINE_STDFUNC(kyu::lang::stdlib::logic::global)
+{
+    auto key = reinterpret_cast<ast::KSymbol*>(args[0]);
+
+    if (key->GetType() != ast::KValueType::Symbol)
+    {
+        return new ast::KNil();
+    }
+
+    auto value = vm->EvaluateValue(args[1]);
+    // TODO: GLOBALS CAN OVERWRITE BUILTINS NOW
+    vm->GetGlobalFrame()->SetValue(key->GetName(), value);
+
+    return value;
+}

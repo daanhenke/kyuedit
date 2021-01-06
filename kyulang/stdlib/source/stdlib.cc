@@ -3,6 +3,7 @@
 #include "string.hh"
 #include "debug.hh"
 #include "logic.hh"
+#include "map.hh"
 
 #define ADD_NATIVE(name, func) builtins->SetValue(name, new ast::KNativeFunction(name, func))
 
@@ -29,4 +30,10 @@ void kyu::lang::stdlib::UseForVm(VirtualMachine *vm)
     ADD_NATIVE("if", logic::_if);
     ADD_NATIVE("equal", logic::equal);
     ADD_NATIVE("subroutine", logic::subroutine);
+    ADD_NATIVE("local", logic::local);
+    ADD_NATIVE("global", logic::global);
+
+    ADD_NATIVE("map", map::newMap);
+    ADD_NATIVE("map-set", map::mapSet);
+    ADD_NATIVE("map-keys", map::mapKeys);
 }

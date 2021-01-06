@@ -26,7 +26,7 @@ kyu::lang::ast::KValue* kyu::lang::VirtualMachine::EvaluateValue(ast::KValue* in
     ast::KValueType type = input->GetType();
 
     // Can't evaluate constants...
-    if (type == ast::KValueType::Number || type == ast::KValueType::String)
+    if (type == ast::KValueType::Number || type == ast::KValueType::String || type == ast::KValueType::Map)
     {
         return input;
     }
@@ -50,26 +50,8 @@ kyu::lang::ast::KValue* kyu::lang::VirtualMachine::EvaluateValue(ast::KValue* in
             // Check if the first entry in the list is a symbol
             if (first_entry->GetType() == ast::KValueType::Symbol)
             {
-                auto symbol = reinterpret_cast<ast::KSymbol*>(first_entry);
-
-                // Handle core functions here because they need low level access to the list
-                if (symbol->GetName() == "define")
-                {
-                    if (list->ValueCount() == 3)
-                    {
-                        auto key = reinterpret_cast<ast::KSymbol*>(list->GetValue(1));
-                        auto value = EvaluateValue(list->GetValue(2));
-                        UpdateSymbol(key, value);
-
-                        return value;
-                    }
-                    else
-                    {
-                        // This should error out
-                    }
-                }
-
                 // Get the underlying value of the symbol
+                auto symbol = reinterpret_cast<ast::KSymbol*>(first_entry);
                 auto value = ResolveSymbol(symbol);
 
                 // Check if the underlying variable is a native function
@@ -116,7 +98,7 @@ kyu::lang::ast::KValue* kyu::lang::VirtualMachine::EvaluateValue(ast::KValue* in
             }
         }
 
-        // TODO: SHOULD EVALUATE EACH CHILD SEPERATELY
+        // Default action for lists
         return list;
     }
 

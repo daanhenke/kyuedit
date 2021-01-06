@@ -9,4 +9,7 @@ namespace kyu::lang::stdlib::logic
     DEFINE_STDFUNC(equal);
 
     DEFINE_STDFUNC(subroutine);
+
+    DEFINE_STDFUNC(local);
+    DEFINE_STDFUNC(global);
 }
