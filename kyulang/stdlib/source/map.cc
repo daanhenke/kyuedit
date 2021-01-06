@@ -27,8 +27,6 @@ DEFINE_STDFUNC(kyu::lang::stdlib::map::newMap)
 
 DEFINE_STDFUNC(kyu::lang::stdlib::map::mapSet)
 {
-    auto map = reinterpret_cast<ast::KMap*>(vm->EvaluateValue(args[0]));
-
     if (args.size() < 3)
     {
         return new ast::KNil();
@@ -38,6 +36,8 @@ DEFINE_STDFUNC(kyu::lang::stdlib::map::mapSet)
     {
         return new ast::KNil();
     }
+
+    auto map = reinterpret_cast<ast::KMap*>(vm->EvaluateValue(args[0]));
 
     for (size_t i = 1; i + 1 < args.size(); i += 2)
     {
